@@ -4,77 +4,96 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'recommend/style.css' %}">
     <title> Algorhythm </title>
 </head>
 <body>
 
     <h1> Your top tracks </h1>
 
+    <div id="wrapper">
+
     {% comment %} Get short term top tracks {% endcomment %}
 
     {% if short_term_top_tracks %}
 
-    <h2> Short term: </h2>
+    <section>
 
-    <ul>
+        <h2> Short term: </h2>
 
-    {% for track in short_term_top_tracks %}
+        <ul>
 
-        <li> <img src="{{ track.image_url }}" height="50"/> <a> {{ track.title }} - {{ track.artist }} </a> </li>
+        {% for track in short_term_top_tracks %}
 
-    {% endfor %}
+            <li> <img src="{{ track.image_url }}" height="50"/> <a> {{ track.title }} - {{ track.artist }} </a> </li>
 
-    </ul>
+        {% endfor %}
 
-    {% else %}
+        </ul>
+        
+    </section>
 
-        <p> No top songs found </p>
+        {% else %}
 
+            <p> No top songs found </p>
+            
     {% endif %}
 
     {% comment %} Get mediun term top tracks {% endcomment %}
 
     {% if medium_term_top_tracks %}
 
-    <h2> Medium term: </h2>
+    <section>
 
-    <ul>
+        <h2> Medium term: </h2>
 
-    {% for track in medium_term_top_tracks %}
+        <ul>
 
-        <li> <img src="{{ track.image_url }}" height="50"/> <a> {{ track.title }} - {{ track.artist }} </a> </li>
+        {% for track in medium_term_top_tracks %}
 
-    {% endfor %}
+            <li> <img src="{{ track.image_url }}" height="50"/> <a> {{ track.title }} - {{ track.artist }} </a> </li>
 
-    </ul>
+        {% endfor %}
 
-    {% else %}
+        </ul>
 
-        <p> No top songs found </p>
-        
+    </section>
+
+        {% else %}
+
+            <p> No top songs found </p>
+            
     {% endif %}
 
     {% comment %} Get long term top tracks {% endcomment %}
 
     {% if long_term_top_tracks %}
 
-    <h2> Long term: </h2>
+    <section>
 
-    <ul>
+        <h2> Long term: </h2>
 
-    {% for track in long_term_top_tracks %}
+        <ul>
 
-        <li> <img src="{{ track.image_url }}" height="50"/> <a> {{ track.title }} - {{ track.artist }} </a> </li>
+        {% for track in long_term_top_tracks %}
 
-    {% endfor %}
+            <li> <img src="{{ track.image_url }}" height="50"/> <a> {{ track.title }} - {{ track.artist }} </a> </li>
 
-    </ul>
+        {% endfor %}
 
-    {% else %}
+        </ul>
 
-        <p> No top songs found </p>
+    </section>
+
+        {% else %}
+
+        <p> Noo top songs found </p>
         
     {% endif %}
+
+    </div>
+
     
 </body>
 
