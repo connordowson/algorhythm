@@ -25,6 +25,7 @@ def get_top_tracks(time_range):
             track_info = {}
             track_info['title'] = track['name']
             track_info['artist'] = track['artists'][0]['name']
+            track_info['image_url'] = track['album']['images'][0]['url']
             tracks_list.append(track_info)
     
     return tracks_list
