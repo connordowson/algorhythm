@@ -15,7 +15,7 @@ oauth = util.prompt_for_user_token(username, scope, client_id, client_secret, re
 def get_top_tracks(time_range):
     if oauth:
         spotify = spotipy.Spotify(auth=oauth)
-        results = spotify.current_user_top_tracks(limit=25, offset=0, time_range=time_range)
+        results = spotify.current_user_top_tracks(limit=10, offset=0, time_range=time_range)
 
         tracks_list = []
 

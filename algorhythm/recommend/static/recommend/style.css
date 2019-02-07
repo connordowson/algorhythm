@@ -1,0 +1,20 @@
+body{
+    font-family: 'Arial';
+}
+
+#wrapper{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+
+li{
+    display: flex;
+    align-items: center;
+    margin: 10px 0;
+}
+
+a{
+    padding: 10px;
+}
