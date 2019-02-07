@@ -20,7 +20,7 @@
 
     {% for track in short_term_top_tracks %}
 
-        <li> <a> {{ track.title }} - {{ track.artist }} </a> </li>
+        <li> <img src="{{ track.image_url }}" height="50"/> <a> {{ track.title }} - {{ track.artist }} </a> </li>
 
     {% endfor %}
 
@@ -42,7 +42,7 @@
 
     {% for track in medium_term_top_tracks %}
 
-        <li> <a> {{ track.title }} - {{ track.artist }} </a> </li>
+        <li> <img src="{{ track.image_url }}" height="50"/> <a> {{ track.title }} - {{ track.artist }} </a> </li>
 
     {% endfor %}
 
@@ -64,7 +64,7 @@
 
     {% for track in long_term_top_tracks %}
 
-        <li> <a> {{ track.title }} - {{ track.artist }} </a> </li>
+        <li> <img src="{{ track.image_url }}" height="50"/> <a> {{ track.title }} - {{ track.artist }} </a> </li>
 
     {% endfor %}
 
