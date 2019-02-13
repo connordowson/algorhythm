@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     {% load static %}
     <link rel="stylesheet" type="text/css" href="{% static 'recommend/style.css' %}">
+    <link rel="shortcut icon" type="image/png" href="{% static 'favicon.ico' %}"/>
     <title> Register </title>
 </head>
 <body>
@@ -16,9 +17,13 @@
 
         {% csrf_token %}
 
+        <fieldset>
+
         {{ form.as_p }}
 
         <input type="submit" value="Register"></input>
+
+        </fieldset>
 
     </form>
     

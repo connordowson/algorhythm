@@ -39,7 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'recommend.apps.RecommendConfig',
     'users.apps.UsersConfig',
-    'spotipy'
+    'spotipy',
+    'bcrypt'
 ]
 
 MIDDLEWARE = [

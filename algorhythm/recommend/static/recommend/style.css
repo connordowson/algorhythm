@@ -5,9 +5,13 @@ body{
 #wrapper{
     width: 100%;
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
 }
 
+ul{
+    list-style-position: inside;
+    padding-left: 0;
+}
 
 li{
     display: flex;
@@ -17,4 +21,20 @@ li{
 
 a{
     padding: 10px;
+}
+
+fieldset{
+    border: none;
+    display: flex;
+    flex-direction: column;
+    display: inline-block;
+    padding: 5px;
+}
+
+input, label{
+    padding: 5px;
+    display: block;
+}
+
+label{
 }
