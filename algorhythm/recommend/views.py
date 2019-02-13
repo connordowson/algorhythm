@@ -38,4 +38,7 @@ def index(request):
         'long_term_top_tracks': get_top_tracks('long_term')
     }
 
-    return render(request, 'index.html', context=context) 
+    return render(request, 'index.html', context=context)
+
+def register(request):
+    return render(request, 'register.html')
