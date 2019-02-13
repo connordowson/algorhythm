@@ -16,9 +16,10 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from users import views as user_views
+from recommend import views as recommend_views
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('register/', user_views.register, name = 'register'),
-    path('recommend/', include('recommend.urls')),
+    path('admin/', admin.site.urls, name = 'Admin'),
+    path('register/', user_views.register, name = 'Register'),
+    path('', recommend_views.index, name = 'Index'),
 ]

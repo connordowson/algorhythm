@@ -2,7 +2,8 @@ from django import forms
 from recommend.models import User
 
 class RegisterForm(forms.ModelForm):
-    password = forms.CharField(widget = forms.PasswordInput)
+    password = forms.CharField(widget=forms.PasswordInput)
+    email = forms.EmailField()
     
     class Meta:
         model = User
