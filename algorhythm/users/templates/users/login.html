@@ -7,16 +7,20 @@
     {% load static %}
     <link rel="stylesheet" type="text/css" href="{% static 'recommend/style.css' %}">
     <link rel="shortcut icon" type="image/png" href="{% static 'favicon.ico' %}"/>
-    <title> Algorhythm </title>
+    <title> Login </title>
 </head>
 <body>
-
-    <h1> Welcome to Algorhythm! </h1>
-
-    <a href="./login"> Log in </a>
-    <a href="./register"> Register </a>
-
     
-</body>
 
+    <form method="POST">
+
+        {% csrf_token %}
+
+        {{ form }}
+
+        <input type="submit" value="Log in">
+
+    </form>
+
+</body>
 </html>

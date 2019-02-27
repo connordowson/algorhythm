@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'recommend/style.css' %}">
+    <link rel="shortcut icon" type="image/png" href="{% static 'favicon.ico' %}"/>
+    <title> Algorhythm </title>
+</head>
+<body>
+
+    <h1> Welcome to Algorhythm </h1>
+
+    <h2> Hi {{current_user}}! </h2>
+
+
+    <form>
+
+        <button name="short_term"> Short term </button>
+
+        <button name="medium_term"> Medium term </button>
+
+        <button name="long_term"> Long term </button>
+
+    </form>
+
+    <div id="wrapper">
+
+    {% comment %} Show tracks once they have been found {% endcomment %}
+
+    {% if top_tracks != 'empty' %}
+
+        <section>
+
+            <h2> Short term: </h2>
+
+            <ul>
+
+            {% for track in short_term_top_tracks %}
+
+                <li>  <a> {{ track.title }} - {{ track.artist }} </a> </li>
+                
+
+            {% endfor %}
+
+            </ul>
+            
+        </section>
+
+            
+    {% endif %}
+
+    </div>
+
+    
+</body>
+
+</html>
