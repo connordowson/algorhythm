@@ -1,5 +1,7 @@
 from django import forms
 from recommend.models import User
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.models import User
 
 class RegisterForm(forms.ModelForm):
     password = forms.CharField(widget=forms.PasswordInput)
@@ -9,3 +11,9 @@ class RegisterForm(forms.ModelForm):
         model = User
         fields = ['email', 'first_name', 'last_name', 'password']
 
+class UserRegistrationForm(UserCreationForm):
+    email = forms.EmailField()
+
+    class Meta:
+        model = User
+        fields = ['username', 'first_name', 'last_name', 'password1', 'password2']
