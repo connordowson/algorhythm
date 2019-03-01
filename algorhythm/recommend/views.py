@@ -22,21 +22,7 @@ def recommend(request):
    
     context = {
         'current_user': request.user.first_name,
-        # 'top_tracks': 'empty'
     }
-
-    if(request.GET.get('long_term')):
-        top_tracks = get_top_tracks('long_term')
-        context.update({'top_tracks': top_tracks})
-
-    if(request.GET.get('medium_term')):
-        top_tracks = get_top_tracks('medium_term')
-    
-    if(request.GET.get('short_term')):
-        top_tracks = get_top_tracks('short_term')
-
-
-    # upload_songs(request.user.id, get_top_tracks('long_term'), 'Long term')
 
     return render(request, 'recommend/recommend.html', context = context)
 
@@ -64,7 +50,7 @@ def get_top_tracks(time_range):
 
     if oauth:
         spotify = spotipy.Spotify(auth=oauth)
-        results = spotify.current_user_top_tracks(limit=25, offset=0, time_range=time_range)
+        results = spotify.current_user_top_tracks(limit=100, offset=0, time_range=time_range)
 
         tracks_list = []
         audio_features = []
@@ -104,10 +90,7 @@ def get_top_tracks(time_range):
                 track_info['song_id'] = getattr(this_song, 'song_id')
                 track_info['title'] = getattr(this_song, 'title')
                 track_info['artist'] = getattr(this_song, 'artist')
-                track_info['album'] = getattr(this_song, 'album')
                 tracks_list.append(track_info)
-
-
             
     return tracks_list
 
