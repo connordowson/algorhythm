@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'recommend/style.css' %}">
+    <link rel="shortcut icon" type="image/png" href="{% static 'favicon.ico' %}"/>
+    <title> Algorhythm - Top tracks </title>
+</head>
+<body>
+
+    <div id="wrapper">
+
+        <h1> Top tracks </h1>
+
+        {% if top_tracks %}
+
+        {% comment %} Show tracks once they have been found {% endcomment %}
+
+        <section>
+
+            <h2> {{ time_range }} </h2>
+
+            <ul>
+
+            {% for track in top_tracks %}
+
+                <li>  <img src='{{ track.image_url }}' height="50"> <a> {{ track.title }} - {{ track.artist }} </a> </li>
+                
+
+            {% endfor %}
+
+            </ul>
+            
+        </section>
+       
+        {% endif %}
+
+    </div>
+
+</body>
+</html>

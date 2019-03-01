@@ -27,5 +27,7 @@ urlpatterns = [
     path('logout/', auth_views.LogoutView.as_view(template_name='users/logout.html'), name = 'logout'),
 
     path('', recommend_views.index, name = 'index'),
-    path('recommend/', recommend_views.recommend, name = 'recommend')
+    path('recommend/', recommend_views.recommend, name = 'recommend'),
+    path('recommend/top_tracks/', recommend_views.top_tracks, name = 'top tracks')
+
 ]

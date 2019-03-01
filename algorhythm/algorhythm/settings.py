@@ -82,7 +82,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'algorhythm',
         'USER': 'postgres',
-        'PASSWORD': 'anfield27@',
+        'PASSWORD': '***REMOVED***',
         'HOST': '127.0.0.1',
         'PORT': '5432',
     }

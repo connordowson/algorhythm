@@ -16,44 +16,17 @@
     <h2> Hi {{current_user}}! </h2>
 
 
-    <form>
+    <form method='GET' action="/recommend/top_tracks/">
 
-        <button name="short_term"> Short term </button>
+        {% csrf_token %}
 
-        <button name="medium_term"> Medium term </button>
+        <button name="time_range" value="short_term"> Short term </button>
 
-        <button name="long_term"> Long term </button>
+        <button name="time_range" value="medium_term"> Medium term </button>
+
+        <button name="time_range" value="long_term"> Long term </button>
 
     </form>
-
-    <div id="wrapper">
-
-    {% comment %} Show tracks once they have been found {% endcomment %}
-
-    {% if top_tracks != 'empty' %}
-
-        <section>
-
-            <h2> Short term: </h2>
-
-            <ul>
-
-            {% for track in short_term_top_tracks %}
-
-                <li>  <a> {{ track.title }} - {{ track.artist }} </a> </li>
-                
-
-            {% endfor %}
-
-            </ul>
-            
-        </section>
-
-            
-    {% endif %}
-
-    </div>
-
     
 </body>
 

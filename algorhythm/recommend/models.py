@@ -39,7 +39,7 @@ class Song(models.Model):
 class UserTopTracks(models.Model):
     user_id = models.ForeignKey(User, on_delete = models.CASCADE)
     song_id = models.ForeignKey(Song, on_delete = models.CASCADE)
-    time_range = models.CharField('Time range', max_length = 10)
+    time_range = models.CharField('Time range', max_length = 11)
     
     class Meta:
-        unique_together = (('user_id', 'song_id'))
+        unique_together = (('user_id', 'song_id', 'time_range'))
