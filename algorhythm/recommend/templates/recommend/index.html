@@ -5,16 +5,55 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     {% load static %}
-    <link rel="stylesheet" type="text/css" href="{% static 'recommend/style.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'main.css' %}">
     <link rel="shortcut icon" type="image/png" href="{% static 'favicon.ico' %}"/>
     <title> Algorhythm </title>
 </head>
 <body>
 
-    <h1> Welcome to Algorhythm! </h1>
+    <nav class="nav">
 
-    <a href="./login"> Log in </a>
-    <a href="./register"> Register </a>
+        <div class="nav__wrapper">
+
+            <a class="nav__title"> algorhythm </a>
+
+            <ul>
+                <a class="link nav__link" href="/login/"> Log In </a>
+                <a class="link nav__link" href="/register/"> Register </a>
+            </ul>
+
+        </div>
+
+    </nav>
+
+    <div class="home-hero">
+
+        <div class="home-hero__wrapper">
+
+            <div class="home-hero__info">
+
+                <h1 class="home-hero__title"> Discover new music, based on users with the same taste as you. </h1>
+
+                <p> Lorem, ipsum dolor sit amet consectetur adipisicing elit. Inventore natus accusamus sunt ea animi est minima sit, commodi omnis expedita aliquid, esse, eos saepe. Molestiae perspiciatis ea repudiandae esse sapiente! </p>
+
+                <p> Lorem ipsum dolor sit amet consectetur adipisicing elit. Suscipit, quas aut quia est voluptatem optio laudantium assumenda voluptatum corporis, distinctio voluptates! </p>
+
+                <a class="btn btn__home-hero btn--large" href="/register/"> Register </a>
+
+                <a class="link home-hero__link" href="/login/"> Already got an account? Log in! </a>
+
+            </div>
+
+            <div class="home-hero__illustration">
+
+                
+
+            </div>
+
+        </div>
+
+    </div>
+
 
     
 </body>

@@ -1,0 +1,16 @@
+{
+    // See https://go.microsoft.com/fwlink/?LinkId=733558
+    // for the documentation about the tasks.json format
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Sass compile",
+            "type": "shell",
+            "command": "node-sass --watch ./algorhythm/algorhythm/static/sass/main.scss ./algorhythm/algorhythm/static/main.css",
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        }
+    ]
+}

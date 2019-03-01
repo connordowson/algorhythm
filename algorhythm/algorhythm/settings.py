@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'recommend.apps.RecommendConfig',
     'users.apps.UsersConfig',
+    'algorhythm',
     'spotipy',
     'bcrypt'
 ]
@@ -125,7 +126,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 
-STATIC_URL = '/static/'
+STATIC_URL = '/algorhythm/static/'
 
 LOGIN_REDIRECT_URL = 'recommend'
 LOGIN_URL = 'login'
