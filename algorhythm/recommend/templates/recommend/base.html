@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'main.css' %}">
+    <link rel="shortcut icon" type="image/png" href="{% static 'favicon.ico' %}"/>
+    <title> {% block title %} Algorhythm {% endblock title %} </title>
+</head>
+<body>
+
+    <nav class="nav">
+
+        <div class="nav__wrapper">
+
+            <a class="nav__title" href="/"> algorhythm </a>
+
+            <ul>
+                <a class="link nav__link" href="/login/"> Log In </a>
+                <a class="link nav__link" href="/register/"> Register </a>
+            </ul>
+
+        </div>
+
+    </nav>
+
+    <div class="container">
+
+        {% block content %}
+
+        Content goes here
+
+        {% endblock content %}
+
+    </div>
+
+
+    
+</body>
+
+</html>

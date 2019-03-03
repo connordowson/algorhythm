@@ -1,38 +1,16 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    {% load static %}
-    <link rel="stylesheet" type="text/css" href="{% static 'main.css' %}">
-    <link rel="shortcut icon" type="image/png" href="{% static 'favicon.ico' %}"/>
-    <title> Algorhythm </title>
-</head>
-<body>
+{% extends "recommend/base.html" %}
 
-    <nav class="nav">
+{% block title %} algorhythm {% endblock title %}
 
-        <div class="nav__wrapper">
+{% block content %}
 
-            <a class="nav__title"> algorhythm </a>
+    <section class="home-hero">
 
-            <ul>
-                <a class="link nav__link" href="/login/"> Log In </a>
-                <a class="link nav__link" href="/register/"> Register </a>
-            </ul>
-
-        </div>
-
-    </nav>
-
-    <div class="home-hero">
-
-        <div class="home-hero__wrapper">
+        <div class="home-hero__wrapper section">
 
             <div class="home-hero__info">
 
-                <h1 class="home-hero__title"> Discover new music, based on users with the same taste as you. </h1>
+                <h1 class="home-hero__title title"> Discover new music, based on users with the same taste as you. </h1>
 
                 <p> Lorem, ipsum dolor sit amet consectetur adipisicing elit. Inventore natus accusamus sunt ea animi est minima sit, commodi omnis expedita aliquid, esse, eos saepe. Molestiae perspiciatis ea repudiandae esse sapiente! </p>
 
@@ -48,14 +26,24 @@
 
                 
 
-            </div>
-
         </div>
+
+    </section>
+
+    <div class="wrapper section__home__wrapper">
+
+        <section class="section section__home">
+
+            <h1 class="section__home__title title"> How does it work? </h1>
+
+            <p class="section__home__text"> dunno lol it fuckin doesnt yet </p>
+
+            <p class="section__home__text"> uses spotify and some other crazy shit </p>
+
+        </section>
 
     </div>
 
+    </div>
 
-    
-</body>
-
-</html>
+{% endblock content %}

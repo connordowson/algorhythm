@@ -12,8 +12,7 @@ class RegisterForm(forms.ModelForm):
         fields = ['email', 'first_name', 'last_name', 'password']
 
 class UserRegistrationForm(UserCreationForm):
-    email = forms.EmailField()
 
     class Meta:
         model = User
-        fields = ['username', 'first_name', 'last_name', 'password1', 'password2']
+        fields = ['username', 'password1', 'password2']

@@ -1,27 +1,81 @@
 // Colours
 
 // Purples
-$purple-primary: #581FA0;
+$purple-primary: hsl(267, 68%, 37%);
 $purple-secondary1: #5738B7;
 $purple-secondary: #5C55CE;
 $--New-Swatch: #7887E5;
-$--New-Swatch: #A0BFFC;
+$purple-light: rgb(223, 233, 255);
 
 // Pinks
-$pink-primary: #FF67E7;
+// $pink-primary: #FF67E7;
+$pink-primary: hsl(309, 85%, 68%);
+
 $--New-Swatch: #E44CBA;
 $--New-Swatch: #C9348F;
 $--New-Swatch: #AE2166;
 $--New-Swatch: #931140;
 
 // Blacks
-$black-primary: #171717;
+$black-primary: #131017;
+$black-secondary: #1D1923;
+$black-third: #37323D;
+
+//white to black
+// --New-Swatch: #F7F7F7;
+// --New-Swatch: #E7E5EB;
+// --New-Swatch: #C8C3CE;
+// --New-Swatch: #AAA4B1;
+// --New-Swatch: #8C8595;
+// --New-Swatch: #706978;
+// --New-Swatch: #544D5C;
+// --New-Swatch: #39343F;
+// --New-Swatch: #1F1B23;
+// --New-Swatch: #141217;
+// --New-Swatch: #332005;
+// --New-Swatch: #664414;
+// --New-Swatch: #996C2E;
+// --New-Swatch: #CC9952;
+// --New-Swatch: #FFCA80;
+
+// --New-Swatch: #F7F7F7;
+// --New-Swatch: #E6E1ED;
+// --New-Swatch: #CCC3D7;
+// --New-Swatch: #A99EB7;
+// --New-Swatch: #827690;
+// --New-Swatch: #635870;
+// --New-Swatch: #494154;
+// --New-Swatch: #302937;
+// --New-Swatch: #1D1923;
+// --New-Swatch: #131017;
+// --New-Swatch: #332005;
+// --New-Swatch: #664414;
+// --New-Swatch: #996C2E;
+// --New-Swatch: #CC9952;
+// --New-Swatch: #FFCA80;
+
+// --New-Swatch: #332005;
+// --New-Swatch: #664414;
+// --New-Swatch: #996C2E;
+// --New-Swatch: #CC9952;
+// --New-Swatch: #FFCA80;
+// --New-Swatch: #F7F7F7;
+// --New-Swatch: #E1D7ED;
+// --New-Swatch: #C0AED7;
+// --New-Swatch: #9A82B7;
+// --New-Swatch: #735B90;
+// --New-Swatch: #564170;
+// --New-Swatch: #413154;
+// --New-Swatch: #2B2237;
+// --New-Swatch: #1D1823;
+// --New-Swatch: #131017;
+
 
 // Whites
 $white-primary: #f7f7f7;
 
 // Aesthetics
-$box-shadow: 0 4px 6px rgba(50,50,93,.11),0 1px 3px rgba(0,0,0,.08);
+$box-shadow: 0 4px 6px rgba(50,50,93,.11), 0 6px 3px rgba(0,0,0,.08);
 
 // Fonts
-@import url('https://fonts.googleapis.com/css?family=Roboto+Slab|Roboto:300,400,700');
+@import url('https://fonts.googleapis.com/css?family=Montserrat:400,700|Roboto+Slab|Roboto:300,400,700');
