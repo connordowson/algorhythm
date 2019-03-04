@@ -5,15 +5,17 @@ from django.contrib.auth.models import User
 from .models import Song, UserTopTracks
 import spotipy
 import spotipy.util as util
+from spotipy.oauth2 import SpotifyClientCredentials
 from datetime import datetime
 
 
 username = '1114744532'
+# username = '1123375424'
 scope = 'user-top-read'
 client_id = '***REMOVED***'
 client_secret = '***REMOVED***'
 redirect_uri = 'http://localhost:8000/recommend/'
-oauth = util.prompt_for_user_token(username, scope, client_id, client_secret, redirect_uri)
+# oauth = util.prompt_for_user_token(username, scope, client_id, client_secret, redirect_uri)
 
 # Create your views here.
 
@@ -21,6 +23,7 @@ oauth = util.prompt_for_user_token(username, scope, client_id, client_secret, re
 def recommend(request):
    
     context = {
+
         'current_user': request.user.first_name,
     }
 
@@ -36,7 +39,8 @@ def top_tracks(request):
 
         context = {
             'top_tracks': get_top_tracks(time_range),
-            'time_range': time_range
+            'time_range': time_range,
+            'current_user':request.user.id
         }
 
         upload_songs(request.user.id, top_tracks, time_range)
@@ -44,16 +48,18 @@ def top_tracks(request):
         return render(request, 'recommend/top_tracks.html', context = context)
 
 
-    return render(request, 'recommend/top_tracks.html', context = context)
+    return render(request, 'recommend.html', context = context)
 
+# @login_required
 def get_top_tracks(time_range):
+
+    oauth = util.prompt_for_user_token(username, scope, client_id, client_secret, redirect_uri)
 
     if oauth:
         spotify = spotipy.Spotify(auth=oauth)
         results = spotify.current_user_top_tracks(limit=100, offset=0, time_range=time_range)
 
         tracks_list = []
-        audio_features = []
 
         top_tracks = results['items']
 
