@@ -29,6 +29,7 @@ urlpatterns = [
     path('', recommend_views.index, name = 'index'),
     path('recommend/', recommend_views.recommend, name = 'recommend'),
     path('recommend/top_tracks/', recommend_views.top_tracks, name = 'top tracks'),
+    path('recommend/short_term/', recommend_views.short_term, name = 'Short term'),
     path('recommend/sign_in_to_spotify/', recommend_views.sign_in_to_spotify, name = 'Sign in to Spotify')
 
 
