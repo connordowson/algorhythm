@@ -1,17 +1,11 @@
 from django.contrib import admin
+from django.contrib.auth.admin import UserAdmin
 
 # Register your models here.
 
 # from .models import User
-from django.contrib.auth.models import User
-from .models import Song, UserTopTracks
-
-class UserAdmin(admin.ModelAdmin):
-    list_display = ('id', 'email', 'first_name', 'last_name')
-    ordering = ('id',)
-
-admin.site.unregister(User)
-admin.site.register(User, UserAdmin)
+from .models import User, Song, UserTopTracks
+admin.site.register(User)
 
 class SongAdmin(admin.ModelAdmin):
     list_display = ('song_id', 'title', 'artist', 'album', 'release_date')
