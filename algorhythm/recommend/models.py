@@ -1,20 +1,42 @@
 from django.db import models
-from django.contrib.auth.models import AbstractBaseUser
-from django.contrib.auth.models import User
-
-
+from django.contrib.auth.models import AbstractUser, UserManager as AbstractUserManager
+from django.utils import timezone
 # Create your models here.
 
-# class User(AbstractBaseUser):
-#     user_id = models.AutoField(primary_key = True)
-#     email = models.CharField('Email', max_length = 75, unique = True)
-#     first_name = models.CharField('First name', max_length = 50)
-#     last_name = models.CharField('Last name', max_length = 50)
-#     password = models.CharField('Password', max_length = 80)
-#     USERNAME_FIELD = 'email'
-#     REQUIRED_FIELDS = ['email', 'first_name', 'last_name']
-#     def __str__(self):
-#         return 'Name: ' + self.first_name + " " + self.last_name
+class UserManager(AbstractUserManager):
+
+    def create_user(self, email, first_name, last_name, password, is_staff, is_superuser, **extra_fields):
+        now = timezone.now()
+        email = self.normalize_email(email)
+        user = self.model(email = email, is_staff = False, is_active = False, is_superuser = False, last_login = now, date_joined = now, **extra_fields)
+        user.set_password(password)
+        user.save()
+        return user
+
+    def create_superuser(self, email, first_name, last_name, password, **extra_fields):
+
+        if password is None:
+            raise TypeError('Superusers must have a password.')
+
+        user = self._create_user(email, first_name, last_name, password, True, True, **extra_fields)
+        
+        user.is_active=True
+        user.save()
+        return user
+
+class User(AbstractUser):
+    username = None
+    access_token = models.CharField('Spotify API access token', max_length = 300)
+    email = models.EmailField(max_length = 254, unique = True)
+    REQUIRED_FIELDS = ['first_name', 'last_name']
+    USERNAME_FIELD = 'email'
+    # first_name = models.CharField(max_length = 100)
+    # last_name = models.CharField(max_length = 100)
+    def __str__(self):
+        return 'Name: ' + self.first_name + " " + self.last_name
+
+    objects = UserManager()
+
 
 class Song(models.Model):
     song_id = models.CharField('Song ID', primary_key = True, max_length = 200)

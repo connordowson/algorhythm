@@ -41,7 +41,6 @@ INSTALLED_APPS = [
     'users.apps.UsersConfig',
     'algorhythm',
     'spotipy',
-    'bcrypt'
 ]
 
 MIDDLEWARE = [
@@ -130,3 +129,4 @@ STATIC_URL = '/algorhythm/static/'
 
 LOGIN_REDIRECT_URL = 'recommend'
 LOGIN_URL = 'login'
+AUTH_USER_MODEL = 'recommend.User'
