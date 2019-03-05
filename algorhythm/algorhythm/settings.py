@@ -130,3 +130,5 @@ STATIC_URL = '/algorhythm/static/'
 LOGIN_REDIRECT_URL = 'recommend'
 LOGIN_URL = 'login'
 AUTH_USER_MODEL = 'recommend.User'
+
+SESSION_AGENT = 'django.contrib.sessions.backends.signed_cookies'

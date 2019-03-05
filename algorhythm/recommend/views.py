@@ -6,63 +6,92 @@ import spotipy.util as util
 from spotipy import oauth2
 from spotipy.oauth2 import SpotifyClientCredentials
 from datetime import datetime
-import urllib.parse 
-from django.urls import resolve
-import webbrowser
-import requests
-import base64
-import json
+from . import spotify_wrapper
+from http import cookies
+
 
 username = '1114744532'
 # username = '1123375424'
-scope = 'user-top-read'
+scope = 'user-top-read playlist-modify-public'
 client_id = '***REMOVED***'
 client_secret = '***REMOVED***'
-redirect_uri = 'http://localhost:8000/recommend/sign_in_to_spotify/'
-sp_oauth = oauth2.SpotifyOAuth(client_id, client_secret ,redirect_uri, scope)
+redirect_uri = 'http://localhost:8000/recommend/'
+# sp_oauth = oauth2.SpotifyOAuth(client_id, client_secret ,redirect_uri, scope)
+auth = spotify_wrapper.SpotifyWrapper(client_id, client_secret, redirect_uri, scope)
 
-# oauth = util.prompt_for_user_token(username, scope, client_id, client_secret, redirect_uri)
 
 # Create your views here.
 
 @login_required
 def recommend(request):
-   
-    context = {
 
+    auth = spotify_wrapper.SpotifyWrapper(client_id, client_secret, redirect_uri, scope)
+
+    context = {
         'current_user': request.user.first_name,
     }
 
-    current_user_id = request.user.id
+    if(request.method == 'GET'):
 
-    this_user = User.objects.get(id = current_user_id)
+        if(request.GET.get('code')):
 
-    token_code = getattr(this_user, 'access_token')
+            code = request.GET.get('code')
+            current_user = request.user
 
-    if token_code:
-        return render(request, 'recommend/recommend.html', context = context)
-    else:
-        prompt_for_user_token(scope, client_id, client_secret, redirect_uri)
+
+            request.session[str(current_user.id)] = code
+
+            context = {
+                'current_user': current_user.first_name,
+                'code': code
+            }
+
+            return render(request, 'recommend/recommend.html', context = context)
+
+        else:
+            auth.get_authorize_url()
+            return render(request, 'recommend/recommend.html', context = context)
+       
+    return render(request, 'recommend/recommend.html')
+
+@login_required
+def short_term(request):
+
+    user_id = request.user.id
+
+    code = request.session[str(user_id)]
+
+    token = auth.get_authorize_token(code)
+
+    results = auth.get_top_tracks(token, 'long_term')
+
+    context = {
+        'code': results,
+        'token': token
+    } 
+    
+    return render(request, 'recommend/top_tracks.html', context = context)
+
 
 @login_required
 def top_tracks(request):
 
-    if request.method == 'GET':
+    # if request.method == 'GET':
 
-        time_range = request.GET.get('time_range')
-        current_user_id = request.user.id
-        top_tracks = get_top_tracks(time_range, current_user_id)
+    #     time_range = request.GET.get('time_range')
+    #     current_user_id = request.user.id
+    #     top_tracks = get_top_tracks(time_range, current_user_id)
 
-        context = {
-            'top_tracks': get_top_tracks(time_range),
-            'time_range': time_range,
-        }
+    #     context = {
+    #         'top_tracks': get_top_tracks(time_range),
+    #         'time_range': time_range,
+    #     }
 
-        upload_songs(request.user.id, top_tracks, time_range)
+    #     upload_songs(request.user.id, top_tracks, time_range)
 
-        return render(request, 'recommend/top_tracks/', context = context)
+    #     return render(request, 'recommend/top_tracks/', context = context)
 
-    return render(request, 'recommend.html', context = context)
+    return render(request, 'recommend.html')
 
 def sign_in_to_spotify(request):
 
@@ -82,69 +111,9 @@ def sign_in_to_spotify(request):
 def get_top_tracks(time_range, current_user_id):
 
     # oauth = util.prompt_for_user_token(username, scope, client_id, client_secret, redirect_uri)
+    
 
-    this_user = User.objects.get(id = current_user_id)
-    token_code = this_user.access_token
-
-    token = sp_oauth.get_access_token(token_code)
-
-    payload = { 'grant_type': 'client_credentials'}
-
-    token = token['access_token']
-
-    if token:
-        spotify = spotipy.Spotify(auth=token)
-        results = spotify.current_user_top_tracks(limit=10, offset=0, time_range=time_range)
-
-        tracks_list = []
-
-        top_tracks = results['items']
-
-        for index, track in enumerate(top_tracks):
-
-            # Check if song info is already on the database
-            if not Song.objects.filter(song_id = track['id']).exists():
-
-                track_info = {}
-                track_info['song_id'] = track['id']
-                track_info['title'] = track['name']
-                track_info['artist'] = track['artists'][0]['name']
-                track_info['album'] = track['album']['name']
-                track_info['image_url'] = track['album']['images'][0]['url']
-
-                release_date_precision = track['album']['release_date_precision']
-
-                if(release_date_precision == "year"):
-                    track_info['release_date'] = int(track['album']['release_date'])
-                else:               
-                    formatted_date = datetime.strptime(track['album']['release_date'], '%Y-%m-%d')
-                    year = formatted_date.year
-                    track_info['release_date'] = int(year)
-
-                # Get audio features for users top songs
-                results = spotify.audio_features(track['id'])
-                track_info['audio_features'] = results[0]
-
-                # Add list of tracks to variable to be used in context
-                tracks_list.append(track_info)
-            else:
-                this_song = Song.objects.get(song_id = track['id'])
-                track_info = {}
-                track_info['song_id'] = getattr(this_song, 'song_id')
-                track_info['title'] = getattr(this_song, 'title')
-                track_info['artist'] = getattr(this_song, 'artist')
-                tracks_list.append(track_info)
-        
-        track_info = {}
-        track_info['song_id'] = '1'
-        track_info['title'] = 'test'
-        track_info['artist'] = 'test'
-        track_info['album'] = 'test'
-        tracks_list.append(track_info)
-
-    return tracks_list
-
-def upload_songs(user_id, songs, time_range):
+# def upload_songs(user_id, songs, time_range):
 
     this_user = User.objects.get(id = user_id)
 
@@ -183,13 +152,6 @@ def upload_songs(user_id, songs, time_range):
                 time_range = time_range
             )
             this_top_tracks.save()
-
-
-def prompt_for_user_token(scope, client_id, client_secret, redirect_uri):
-
-    auth_url = sp_oauth.get_authorize_url()
-
-    webbrowser.open(auth_url)
 
 
 # @login_required
