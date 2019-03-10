@@ -1,39 +1,21 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    {% load static %}
-    <link rel="stylesheet" type="text/css" href="{% static 'recommend/style.css' %}">
-    <link rel="shortcut icon" type="image/png" href="{% static 'favicon.ico' %}"/>
-    <title> Algorhythm </title>
-</head>
-<body>
+{% extends "recommend/base.html" %}
 
-    <h1> Welcome to Algorhythm </h1>
+{% block title %} algorhythm {% endblock title %}
 
-    <h2> Hi {{current_user}}! </h2>
+{% block content %}
 
+<section class="section">
 
-    <form method='GET' action="/recommend/top_tracks/">
-
-        {% csrf_token %}
-
-        <button name="time_range" value="short_term"> Short term </button>
-
-        <button name="time_range" value="medium_term"> Medium term </button>
-
-        <button name="time_range" value="long_term"> Long term </button>
-
-    </form>
+    <h2 class="title"> Hi {{current_user}}! </h2>
 
     <ul>
 
-        <a href="/recommend/short_term/" value="{{code}}"> Short term </a>
+        <a href="/recommend/short_term/"> Short term </a>
+        <a href="/recommend/medium_term/"> Medium term </a>
+        <a href="/recommend/long_term/"> Long term </a>
 
     </ul>
-    
-</body>
 
-</html>
+</section>
+
+{% endblock content %}
