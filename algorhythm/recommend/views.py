@@ -25,8 +25,6 @@ auth = spotify_wrapper.SpotifyWrapper(client_id, client_secret, redirect_uri, sc
 @login_required
 def recommend(request):
 
-    auth = spotify_wrapper.SpotifyWrapper(client_id, client_secret, redirect_uri, scope)
-
     context = {
         'current_user': request.user.first_name,
     }
@@ -38,19 +36,22 @@ def recommend(request):
             code = request.GET.get('code')
             current_user = request.user
 
-
             request.session[str(current_user.id)] = code
+
+            token = auth.get_authorize_token(code)
+
+            request.session[str(current_user.id) + "_token"] = token
+
 
             context = {
                 'current_user': current_user.first_name,
-                'code': code
             }
 
             return render(request, 'recommend/recommend.html', context = context)
 
         else:
-            auth.get_authorize_url()
-            return render(request, 'recommend/recommend.html', context = context)
+            url = auth.get_authorize_url()
+            return redirect(url)
        
     return render(request, 'recommend/recommend.html')
 
@@ -61,17 +62,58 @@ def short_term(request):
 
     code = request.session[str(user_id)]
 
-    token = auth.get_authorize_token(code)
+    # token = auth.get_authorize_token(code)
 
-    results = auth.get_top_tracks(token, 'long_term')
+    token = request.session[str(user_id) + "_token"]
+
+    results = auth.get_top_tracks(token, 'short_term')
 
     context = {
-        'code': results,
-        'token': token
+        'top_tracks': results,
+        'time_range': 'Short term'
     } 
     
     return render(request, 'recommend/top_tracks.html', context = context)
 
+@login_required
+def medium_term(request):
+
+    user_id = request.user.id
+
+    code = request.session[str(user_id)]
+
+    # token = auth.get_authorize_token(code)
+
+    token = request.session[str(user_id) + "_token"]
+
+    results = auth.get_top_tracks(token, 'medium_term')
+
+    context = {
+        'top_tracks': results,
+        'time_range': 'Medium term'
+    } 
+    
+    return render(request, 'recommend/top_tracks.html', context = context)
+
+@login_required
+def long_term(request):
+
+    user_id = request.user.id
+
+    code = request.session[str(user_id)]
+
+    # token = auth.get_authorize_token(code)
+
+    token = request.session[str(user_id) + "_token"]
+
+    results = auth.get_top_tracks(token, 'long_term')
+
+    context = {
+        'top_tracks': results,
+        'time_range': 'Long term'
+    } 
+    
+    return render(request, 'recommend/top_tracks.html', context = context)
 
 @login_required
 def top_tracks(request):

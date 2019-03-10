@@ -1,7 +1,7 @@
 // Colours
 
 // Purples
-$purple-primary: hsl(267, 68%, 37%);
+$purple-primary: #571e9e;
 $purple-secondary1: #5738B7;
 $purple-secondary: #5C55CE;
 $--New-Swatch: #7887E5;
@@ -54,28 +54,22 @@ $black-third: #37323D;
 // --New-Swatch: #CC9952;
 // --New-Swatch: #FFCA80;
 
-// --New-Swatch: #332005;
-// --New-Swatch: #664414;
-// --New-Swatch: #996C2E;
-// --New-Swatch: #CC9952;
-// --New-Swatch: #FFCA80;
-// --New-Swatch: #F7F7F7;
-// --New-Swatch: #E1D7ED;
-// --New-Swatch: #C0AED7;
-// --New-Swatch: #9A82B7;
-// --New-Swatch: #735B90;
-// --New-Swatch: #564170;
-// --New-Swatch: #413154;
-// --New-Swatch: #2B2237;
-// --New-Swatch: #1D1823;
-// --New-Swatch: #131017;
-
+$New-Swatch: #F7F7F7;
+$New-Swatch: #E1D7ED;
+$New-Swatch: #C0AED7;
+$New-Swatch: #9A82B7;
+$New-Swatch: #735B90;
+$New-Swatch: #564170;
+$New-Swatch: #413154;
+$black_3: #2B2237;
+$black_2: #1D1823;
+$black_1: #131017;
 
 // Whites
 $white-primary: #f7f7f7;
 
 // Aesthetics
-$box-shadow: 0 4px 6px rgba(50,50,93,.11), 0 6px 3px rgba(0,0,0,.08);
+$box-shadow: 0 4px 6px rgba(50,50,93,.11), 0 3px 6px rgba(0,0,0,.08);
 
 // Fonts
 @import url('https://fonts.googleapis.com/css?family=Montserrat:400,700|Roboto+Slab|Roboto:300,400,700');

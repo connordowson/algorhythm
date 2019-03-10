@@ -1,52 +1,30 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    {% load static %}
-    <link rel="stylesheet" type="text/css" href="{% static 'recommend/style.css' %}">
-    <link rel="shortcut icon" type="image/png" href="{% static 'favicon.ico' %}"/>
-    <title> Algorhythm - Top tracks </title>
-</head>
-<body>
+{% extends "recommend/base.html" %}
 
-    <div id="wrapper">
+{% block title %} Top tracks {% endblock title %}
 
-        <h1> Top tracks </h1>
+{% block content %}
 
-        {% if code %}
 
-            <h2> {{ code }} </h2>
+<section class="section section__top-tracks">
 
-            <h2> {{ token }} </h2>
-
-        {% endif %}
+    <h1 class="section__title title top-track__title"> Top tracks - {{ time_range }} </h1>
 
         {% if top_tracks %}
 
         {% comment %} Show tracks once they have been found {% endcomment %}
 
-        <section>
-
-            <h2> {{ time_range }} </h2>
-
             <ul>
 
             {% for track in top_tracks %}
 
-                <li>  <img src='{{ track.image_url }}' height="50"> <a> {{ track.title }} - {{ track.artist }} </a> </li>
-                
+                <li class="top-track">  <img src='{{ track.image_url }}' height="50"> <a class="top-track__text"> {{forloop.counter}}. {{ track.title }} - {{ track.artist }} </a> </li>                
 
             {% endfor %}
 
             </ul>
-            
-        </section>
-       
+                   
         {% endif %}
 
-    </div>
+</section>
 
-</body>
-</html>
+{% endblock content %}
