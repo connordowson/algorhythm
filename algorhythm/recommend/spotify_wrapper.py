@@ -79,7 +79,7 @@ class SpotifyWrapper(object):
                 track_info['title'] = track['name']
                 track_info['artist'] = track['artists'][0]['name']
                 track_info['album'] = track['album']['name']
-                track_info['image_url'] = track['album']['images'][0]['url']
+                track_info['image_url'] = track['album']['images'][2]['url']
 
                 release_date_precision = track['album']['release_date_precision']
 
@@ -91,9 +91,9 @@ class SpotifyWrapper(object):
                     track_info['release_date'] = int(year)
 
                 # Get audio features for users top songs
-                results = self.get_audio_features(track['id'], token)
+                audio_features = self.get_audio_features(track['id'], token)
 
-                track_info['audio_features'] = results
+                track_info['audio_features'] = audio_features
 
                 # Add list of tracks to variable to be used in context
                 tracks_list.append(track_info)
@@ -111,11 +111,7 @@ class SpotifyWrapper(object):
 
         endpoint = 'https://api.spotify.com/v1/audio-features/'
 
-        queries = {'id': song_id}
-
-        urlparams = urllib.parse.urlencode(queries)
-
-        url = "%s?%s" % (endpoint, urlparams)
+        url = endpoint + song_id
 
         headers = {'Authorization': 'Bearer {0}'.format(token), 'Accept': 'application/json', 'Content-Type' : 'application/json'}
 
