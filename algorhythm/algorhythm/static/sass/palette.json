@@ -1,0 +1,137 @@
+[
+    {
+      "paletteName": "white",
+      "swatches": [
+        {
+          "name": "base-100",
+          "color": "F7F7F7"
+        },
+        {
+          "name": "base-200",
+          "color": "E1D7ED"
+        },
+        {
+          "name": "base-300",
+          "color": "C0AED7"
+        },
+        {
+          "name": "base-400",
+          "color": "9A82B7"
+        },
+        {
+          "name": "base-500",
+          "color": "735B90"
+        },
+        {
+          "name": "base-600",
+          "color": "564170"
+        },
+        {
+          "name": "base-700",
+          "color": "402F54"
+        },
+        {
+          "name": "base-800",
+          "color": "2A1F37"
+        },
+        {
+          "name": "base-900",
+          "color": "1B1423"
+        },
+        {
+          "name": "base-1000",
+          "color": "120E17"
+        }
+      ]
+    },
+    {
+      "paletteName": "purples",
+      "swatches": [
+        {
+          "name": "purple-10",
+          "color": "4F1E9E"
+        },
+        {
+          "name": "purple-9",
+          "color": "5D2FA8"
+        },
+        {
+          "name": "purple-8",
+          "color": "6D41B2"
+        },
+        {
+          "name": "purple-7",
+          "color": "7D56BC"
+        },
+        {
+          "name": "purple-6",
+          "color": "8F6CC6"
+        },
+        {
+          "name": "purple-5",
+          "color": "A185CF"
+        },
+        {
+          "name": "purple-4",
+          "color": "B59ED9"
+        },
+        {
+          "name": "purple-3",
+          "color": "CABAE3"
+        },
+        {
+          "name": "purple-2",
+          "color": "E0D8ED"
+        },
+        {
+          "name": "New Swatch",
+          "color": "F7F7F7"
+        }
+      ]
+    },
+    {
+      "paletteName": "pinks",
+      "swatches": [
+        {
+          "name": "New Swatch",
+          "color": "F268DD"
+        },
+        {
+          "name": "New Swatch",
+          "color": "F378E0"
+        },
+        {
+          "name": "New Swatch",
+          "color": "F387E3"
+        },
+        {
+          "name": "New Swatch",
+          "color": "F497E6"
+        },
+        {
+          "name": "New Swatch",
+          "color": "F4A7E9"
+        },
+        {
+          "name": "New Swatch",
+          "color": "F5B7EC"
+        },
+        {
+          "name": "New Swatch",
+          "color": "F6C7EF"
+        },
+        {
+          "name": "New Swatch",
+          "color": "F6D7F2"
+        },
+        {
+          "name": "New Swatch",
+          "color": "F7E7F5"
+        },
+        {
+          "name": "New Swatch",
+          "color": "F8F8F8"
+        }
+      ]
+    }
+  ]
