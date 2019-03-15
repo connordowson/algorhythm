@@ -35,6 +35,7 @@ def recommend(request):
 
             code = request.GET.get('code')
             current_user = request.user
+            
 
             request.session[str(current_user.id)] = code
 
@@ -71,7 +72,9 @@ def short_term(request):
     context = {
         'top_tracks': results,
         'time_range': 'Short term'
-    } 
+    }
+
+    upload_songs(user_id, results, 'short_term')
     
     return render(request, 'recommend/top_tracks.html', context = context)
 
@@ -93,6 +96,8 @@ def medium_term(request):
         'time_range': 'Medium term'
     } 
     
+    upload_songs(user_id, results, 'medium_term')
+
     return render(request, 'recommend/top_tracks.html', context = context)
 
 @login_required
@@ -111,51 +116,14 @@ def long_term(request):
     context = {
         'top_tracks': results,
         'time_range': 'Long term'
-    } 
+    }
+
+    upload_songs(user_id, results, 'long_term')
     
     return render(request, 'recommend/top_tracks.html', context = context)
 
-@login_required
-def top_tracks(request):
 
-    # if request.method == 'GET':
-
-    #     time_range = request.GET.get('time_range')
-    #     current_user_id = request.user.id
-    #     top_tracks = get_top_tracks(time_range, current_user_id)
-
-    #     context = {
-    #         'top_tracks': get_top_tracks(time_range),
-    #         'time_range': time_range,
-    #     }
-
-    #     upload_songs(request.user.id, top_tracks, time_range)
-
-    #     return render(request, 'recommend/top_tracks/', context = context)
-
-    return render(request, 'recommend.html')
-
-def sign_in_to_spotify(request):
-
-    if request.method == 'GET':
-
-        code = request.GET.get('code')
-
-        current_user = request.user.id
-
-        this_user = User.objects.get(id = current_user)
-        this_user.access_token = code
-        this_user.save()
-
-    return redirect('/recommend/')
-
-# @login_required
-def get_top_tracks(time_range, current_user_id):
-
-    # oauth = util.prompt_for_user_token(username, scope, client_id, client_secret, redirect_uri)
-    
-
-# def upload_songs(user_id, songs, time_range):
+def upload_songs(user_id, songs, time_range):
 
     this_user = User.objects.get(id = user_id)
 
