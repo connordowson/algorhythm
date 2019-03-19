@@ -257,12 +257,13 @@
     grid-column-gap: 16px;
 }
 
-recommend__selection{
+.recommend__selection{
     box-shadow: $box-shadow;
 }
 
 .recommend__selection .panel{
     border-radius: 2px 2px 0 0;
+    border-top: 6px solid $pink-primary !important;
 }
 
 .recommend__bottom{
