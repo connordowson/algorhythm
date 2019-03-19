@@ -4,17 +4,80 @@
 
 {% block content %}
 
-<section class="section">
+{% load static %}
+
+<section class="section recommend__wrapper">
 
     <h2 class="title"> Hi {{current_user}}! </h2>
 
-    <ul>
+    <div class="recommend__grid">
 
-        <a class="btn" href="/recommend/short_term/"> Short term </a>
-        <a class="btn" href="/recommend/medium_term/"> Medium term </a>
-        <a class="btn" href="/recommend/long_term/"> Long term </a>
+        <div class="recommend__selection">
 
-    </ul>
+            <div class="panel">
+
+                <h2 class="panel__title title recommend__title"> Short term </h2>
+    
+                <p class="panel__text"> Your recommendations will be based off of music which you have been listening to recently (around 1 month). </p>
+            
+            </div>
+
+            <div class="recommend__bottom">
+                    
+                <img class="recommend-illustration" src="{% static 'images/recommend_1.svg' %}"" alt="">
+                
+                <a class="btn btn--large btn__recommend" href="/recommend/short_term/"> Short term </a>
+
+            </div>
+            
+        
+        </div>
+        
+        <div class="recommend__selection">
+
+            <div class="panel">
+
+                <h2 class="panel__title title recommend__title"> Medium term </h2>
+    
+                <p class="panel__text"> Your recommendations will be based off of listening history since the creation of your Spotify account. </p>
+            
+            </div>
+
+            <div class="recommend__bottom">
+                    
+                <img class="recommend-illustration" src="{% static 'images/recommend_2.svg' %}"" alt="">
+                
+                <a class="btn btn--large btn__recommend" href="/recommend/medium_term/"> Medium term </a>
+
+            </div>
+          
+        
+        </div>
+        
+        <div class="recommend__selection">
+
+            <div class="panel">
+
+                <h2 class="panel__title title recommend__title"> Long term </h2>
+    
+                <p class="panel__text"> Your recommendations will be based off of music you have been listening to in the last 6 months(ish). </p>
+            
+            </div>
+
+            <div class="recommend__bottom">
+                    
+                <img class="recommend-illustration" src="{% static 'images/recommend_3.svg' %}"" alt="">
+                    
+                <a class="btn btn--large btn__recommend" href="/recommend/long_term/"> Long term </a>
+
+            </div>
+            
+        
+        </div>
+
+    </div>
+
+    
 
 </section>
 
