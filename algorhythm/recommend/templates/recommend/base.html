@@ -18,8 +18,14 @@
             <a class="nav__title" href="/"> algorhythm </a>
 
             <ul>
+                {% if not user.is_authenticated %}
                 <a class="link nav__link" href="/login/"> Log In </a>
                 <a class="link nav__link" href="/register/"> Register </a>
+                {% endif %}
+                {% if user.is_authenticated %}
+                <a class="link nav__link" href="/recommend/"> Recommend </a>
+                <a class="link nav__link" href="/logout/"> Log Out </a>
+                {% endif %}
             </ul>
 
         </div>
