@@ -12,7 +12,7 @@ body {
 
 p,
 ul {
-  line-height: 1.4; }
+  line-height: 1.5; }
 
 .container {
   padding: 36px 0; }
@@ -93,9 +93,9 @@ ul {
 
 .home-hero__illustration {
   grid-column: 8/13;
-  background: url("./images/home-image.svg");
+  background: url("./images/sarah-2.svg");
   background-position: center;
-  background-size: 100%;
+  background-size: 90%;
   background-repeat: no-repeat; }
 
 .link {
