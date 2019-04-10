@@ -17,6 +17,12 @@ ul {
 .container {
   padding: 36px 0; }
 
+.title {
+  font-size: 22pt;
+  letter-spacing: 0.8pt;
+  margin-bottom: 16px;
+  color: #F7F7F7; }
+
 .nav {
   background: #502A8C;
   padding: 12px;
@@ -86,10 +92,10 @@ ul {
       margin-bottom: 0; }
 
 .home-hero__title {
-  color: #F7F7F7; }
+  color: #f268dd; }
 
 .home-hero__text {
-  color: #f268dd; }
+  color: #F7F7F7; }
 
 .home-hero__illustration {
   grid-column: 8/13;
@@ -112,6 +118,7 @@ ul {
   border-radius: 2px;
   display: block;
   box-shadow: 0 4px 6px rgba(50, 50, 93, 0.11), 0 3px 6px rgba(0, 0, 0, 0.08);
+  text-shadow: 0 4px 2px rgba(50, 50, 93, 0.11), 1px 3px 2px rgba(0, 0, 0, 0.08);
   line-height: 0.8;
   font-size: 14pt;
   float: left;
@@ -145,12 +152,6 @@ ul {
   border-radius: 2px;
   border-top: 6px solid #f268dd;
   box-shadow: 0 4px 6px rgba(50, 50, 93, 0.11), 0 3px 6px rgba(0, 0, 0, 0.08); }
-
-.title {
-  font-size: 22pt;
-  letter-spacing: 0.8pt;
-  margin-bottom: 16px;
-  color: #F7F7F7; }
 
 .form__title,
 .top-track__title {
