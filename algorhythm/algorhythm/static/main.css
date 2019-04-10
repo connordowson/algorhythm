@@ -99,7 +99,7 @@ ul {
 
 .home-hero__illustration {
   grid-column: 8/13;
-  background: url("./images/sarah-2.svg");
+  background: url("./images/sarah.svg");
   background-position: center;
   background-size: 90%;
   background-repeat: no-repeat; }
