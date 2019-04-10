@@ -8,39 +8,39 @@
         },
         {
           "name": "base-200",
-          "color": "E1D7ED"
+          "color": "DFD7ED"
         },
         {
           "name": "base-300",
-          "color": "C0AED7"
+          "color": "BEAED7"
         },
         {
           "name": "base-400",
-          "color": "9A82B7"
+          "color": "9682B7"
         },
         {
           "name": "base-500",
-          "color": "735B90"
+          "color": "6F5B90"
         },
         {
           "name": "base-600",
-          "color": "564170"
+          "color": "534170"
         },
         {
           "name": "base-700",
-          "color": "402F54"
+          "color": "3D2F54"
         },
         {
           "name": "base-800",
-          "color": "2A1F37"
+          "color": "281F37"
         },
         {
           "name": "base-900",
-          "color": "1B1423"
+          "color": "1A1423"
         },
         {
           "name": "base-1000",
-          "color": "120E17"
+          "color": "110E17"
         }
       ]
     },
@@ -53,15 +53,15 @@
         },
         {
           "name": "purple-9",
-          "color": "5D3998"
+          "color": "5E3998"
         },
         {
           "name": "purple-8",
-          "color": "6E4BA4"
+          "color": "6D4BA4"
         },
         {
           "name": "purple-7",
-          "color": "7D5EB0"
+          "color": "7E5EB0"
         },
         {
           "name": "purple-6",
@@ -110,7 +110,7 @@
         },
         {
           "name": "New Swatch",
-          "color": "F4A7E9"
+          "color": "F4A7E8"
         },
         {
           "name": "New Swatch",
@@ -122,7 +122,7 @@
         },
         {
           "name": "New Swatch",
-          "color": "F6D7F2"
+          "color": "F6D7F1"
         },
         {
           "name": "New Swatch",
