@@ -1,17 +1,12 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from .models import Song, UserTopTracks, User
-import spotipy
-import spotipy.util as util
-from spotipy import oauth2
-from spotipy.oauth2 import SpotifyClientCredentials
 from datetime import datetime
 from . import spotify_wrapper
 from http import cookies
 
 
 username = '1114744532'
-# username = '1123375424'
 scope = 'user-top-read playlist-modify-public'
 client_id = '***REMOVED***'
 client_secret = '***REMOVED***'

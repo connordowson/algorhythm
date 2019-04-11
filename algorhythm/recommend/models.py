@@ -21,12 +21,13 @@ class UserManager(AbstractUserManager):
         user = self.create_user(email, first_name, last_name, password, True, True, **extra_fields)
         
         user.is_active=True
+        user.is_superuser=True
+        user.is_staff=True
         user.save()
         return user
 
 class User(AbstractUser):
     username = None
-    access_code = models.CharField('Spotify API access code', max_length = 300)
     email = models.EmailField(max_length = 254, unique = True)
     REQUIRED_FIELDS = ['first_name', 'last_name']
     USERNAME_FIELD = 'email'
@@ -64,3 +65,11 @@ class UserTopTracks(models.Model):
     
     class Meta:
         unique_together = (('user_id', 'song_id', 'time_range'))
+
+class SongFeedback(models.Model):
+    user_id = models.ForeignKey(User, on_delete = models.CASCADE)
+    song_id = models.ForeignKey(Song, on_delete = models.CASCADE)
+    feedback = models.CharField('User feedback', max_length = 20)
+
+    class Meta:
+        unique_together = (('user_id', 'song_id', 'feedback'))

@@ -25,7 +25,7 @@ SECRET_KEY = '***REMOVED***'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['algorhythm.connordowson.com', 'localhost']
 
 
 # Application definition
@@ -40,7 +40,6 @@ INSTALLED_APPS = [
     'recommend.apps.RecommendConfig',
     'users.apps.UsersConfig',
     'algorhythm',
-    'spotipy',
 ]
 
 MIDDLEWARE = [
@@ -81,10 +80,10 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'algorhythm',
-        'USER': 'postgres',
+        'USER': 'admin',
         'PASSWORD': '***REMOVED***',
-        'HOST': '127.0.0.1',
-        'PORT': '5432',
+        'HOST': 'localhost',
+        'PORT': '',
     }
 }
 
