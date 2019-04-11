@@ -8,7 +8,6 @@ pylint = "*"
 
 [packages]
 django = "*"
-spotipy = "*"
 psycopg2 = "*"
 bcrypt = "*"
 
