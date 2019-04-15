@@ -80,7 +80,7 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'algorhythm',
-        'USER': 'admin',
+        'USER': 'postgres',
         'PASSWORD': '***REMOVED***',
         'HOST': 'localhost',
         'PORT': '',
@@ -124,7 +124,13 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 
-STATIC_URL = '/algorhythm/static/'
+STATIC_URL = '/static/'
+# STATIC_ROOT = '/var/www/algorhythm.connordowson.com/static/'
+
+# STATICFILES_DIRS = [
+#     os.path.join(BASE_DIR, "static"),
+#     '/var/www/algorhythm.connordowson.com/',
+# ]
 
 LOGIN_REDIRECT_URL = 'recommend'
 LOGIN_URL = 'login'

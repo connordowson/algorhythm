@@ -5,11 +5,13 @@
 {% block content %}
 
 
-<section class="section section__top-tracks">
+<section class="section">
+
+    <div class="panel section__top-tracks">
 
     <h1 class="section__title title top-track__title"> Top tracks - {{ time_range }} </h1>
 
-    <p class="panel__text"> Thanks for submitting your top tracks! You will recieve an email in the near future when your recommendations are ready for you to view! </p> <br>
+    <p class="panel__text"> Thanks for submitting your top tracks! You will recieve an email in a few weeks when your recommendations are ready for you to view! </p> <br>
 
 
         {% if top_tracks %}
@@ -28,6 +30,8 @@
                    
         {% endif %}
 
+    </div>
+    
 </section>
 
 {% endblock content %}

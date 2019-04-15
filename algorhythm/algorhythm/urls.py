@@ -16,9 +16,14 @@ Including another URLconf
 from django.contrib import admin
 from django.contrib.auth import views as auth_views
 from django.urls import path, include
+from django.conf.urls import handler404, handler500
 
 from users import views as user_views
 from recommend import views as recommend_views
+
+handler404 = 'recommend.views.view_404'
+handler500 = 'recommend.views.view_500'
+
 
 urlpatterns = [
     path('admin/', admin.site.urls, name = 'admin'),
@@ -32,5 +37,5 @@ urlpatterns = [
     path('recommend/medium_term/', recommend_views.medium_term, name = 'Medium term'),
     path('recommend/long_term/', recommend_views.long_term, name = 'Long term'),
 
-
 ]
+
