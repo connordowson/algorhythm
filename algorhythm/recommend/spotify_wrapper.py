@@ -72,7 +72,7 @@ class SpotifyWrapper(object):
         for index, track in enumerate(top_tracks):
 
             # Check if song info is already on the database
-            if not Song.objects.filter(song_id = track['id']).exists():
+            if not(Song.objects.filter(song_id = track['id']).exists()):
 
                 track_info = {}
                 track_info['song_id'] = track['id']
@@ -103,6 +103,7 @@ class SpotifyWrapper(object):
                 track_info['song_id'] = getattr(this_song, 'song_id')
                 track_info['title'] = getattr(this_song, 'title')
                 track_info['artist'] = getattr(this_song, 'artist')
+                track_info['image_url'] = track['album']['images'][2]['url']
                 tracks_list.append(track_info)
 
         return tracks_list

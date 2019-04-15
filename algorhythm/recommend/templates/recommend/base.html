@@ -4,10 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="theme-color" content="#502A8C">
     {% load static %}
     <link rel="stylesheet" type="text/css" href="{% static 'main.css' %}">
     <link rel="shortcut icon" type="image/png" href="{% static 'favicon.ico' %}"/>
     <title> {% block title %} Algorhythm {% endblock title %} </title>
+    {% block meta %}
+        {% include "recommend/meta.html" %}
+    {% endblock %}
 </head>
 <body>
 

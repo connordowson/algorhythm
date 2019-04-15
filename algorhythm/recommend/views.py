@@ -6,44 +6,46 @@ from . import spotify_wrapper
 from http import cookies
 
 
-username = '1114744532'
 scope = 'user-top-read playlist-modify-public'
 client_id = '***REMOVED***'
 client_secret = '***REMOVED***'
-redirect_uri = 'http://localhost:8000/recommend/'
-# sp_oauth = oauth2.SpotifyOAuth(client_id, client_secret ,redirect_uri, scope)
+redirect_uri = 'https://algorhythm.connordowson.com/recommend/'
+
 auth = spotify_wrapper.SpotifyWrapper(client_id, client_secret, redirect_uri, scope)
 
 
 # Create your views here.
-
 @login_required
 def recommend(request):
-
-    context = {
-        'current_user': request.user.first_name,
-    }
 
     if(request.method == 'GET'):
 
         if(request.GET.get('code')):
 
             code = request.GET.get('code')
+
             current_user = request.user
-            
+            request.session[str(current_user.id) + "_code"] = code
 
-            request.session[str(current_user.id)] = code
+            if(request.session.get(str(current_user.id) + "_token")):
 
-            token = auth.get_authorize_token(code)
+                context = {
+                    'current_user': current_user.first_name,
+                }
 
-            request.session[str(current_user.id) + "_token"] = token
+                return render(request, 'recommend/recommend.html', context = context)
 
+            else:
+                request.session[str(current_user.id) + "_code"] = code
 
-            context = {
-                'current_user': current_user.first_name,
-            }
+                token = auth.get_authorize_token(code)
 
-            return render(request, 'recommend/recommend.html', context = context)
+                request.session[str(current_user.id) + "_token"] = token
+
+                context = {
+                    'current_user': request.user.first_name,
+                }
+                return render(request, 'recommend/recommend.html', context = context)
 
         else:
             url = auth.get_authorize_url()
@@ -56,11 +58,9 @@ def short_term(request):
 
     user_id = request.user.id
 
-    code = request.session[str(user_id)]
+    code = request.session.get(str(user_id) + "_code")
 
-    # token = auth.get_authorize_token(code)
-
-    token = request.session[str(user_id) + "_token"]
+    token = request.session.get(str(user_id) + "_token")
 
     results = auth.get_top_tracks(token, 'short_term')
 
@@ -78,11 +78,9 @@ def medium_term(request):
 
     user_id = request.user.id
 
-    code = request.session[str(user_id)]
+    code = request.session.get(str(user_id) + "_code")
 
-    # token = auth.get_authorize_token(code)
-
-    token = request.session[str(user_id) + "_token"]
+    token = request.session.get(str(user_id) + "_token")
 
     results = auth.get_top_tracks(token, 'medium_term')
 
@@ -100,11 +98,9 @@ def long_term(request):
 
     user_id = request.user.id
 
-    code = request.session[str(user_id)]
+    code = request.session.get(str(user_id) + "_code")
 
-    # token = auth.get_authorize_token(code)
-
-    token = request.session[str(user_id) + "_token"]
+    token = request.session.get(str(user_id) + "_token")
 
     results = auth.get_top_tracks(token, 'long_term')
 
@@ -122,11 +118,13 @@ def upload_songs(user_id, songs, time_range):
 
     this_user = User.objects.get(id = user_id)
 
+    UserTopTracks.objects.filter(user_id = user_id, time_range = time_range).delete()
+
     for track in songs:
 
         this_song_id = track['song_id']
 
-        if not Song.objects.filter(song_id = this_song_id).exists():
+        if((not Song.objects.filter(song_id = this_song_id).exists()) and (not Song.objects.filter(title = track['title'], artist = track['artist']).exists())):
             this_song = Song.objects.create(
                 song_id = this_song_id,
                 title = track['title'],
@@ -147,18 +145,23 @@ def upload_songs(user_id, songs, time_range):
             )
             this_song.save()
 
-        if not UserTopTracks.objects.filter(user_id = user_id, song_id = this_song_id, time_range = time_range).exists():
+        song_to_upload = Song.objects.filter(title = track['title'], artist = track['artist']).first()
 
-            this_song = Song.objects.get(song_id = this_song_id)
+        if not (UserTopTracks.objects.filter(user_id = this_user, song_id = song_to_upload, time_range = time_range).exists()):
 
             this_top_tracks = UserTopTracks.objects.create(
                 user_id = this_user,
-                song_id = this_song,
+                song_id = song_to_upload,
                 time_range = time_range
             )
             this_top_tracks.save()
 
 
-# @login_required
+def view_404(request, exception):
+    return render(request, 'recommend/404.html')
+
+def view_500(request, exception):
+    return render(request, 'recommend/500.html')
+
 def index(request):
     return render(request, 'recommend/index.html')
