@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
-from .models import Song, UserTopTracks, User
+from .models import Song, UserTopTracks, User, Recommendation
 from datetime import datetime
 from . import spotify_wrapper
 from http import cookies
@@ -10,6 +10,8 @@ scope = 'user-top-read playlist-modify-public'
 client_id = '***REMOVED***'
 client_secret = '***REMOVED***'
 redirect_uri = 'https://algorhythm.connordowson.com/recommend/'
+redirect_uri = 'http://localhost:8000/recommend/'
+
 
 auth = spotify_wrapper.SpotifyWrapper(client_id, client_secret, redirect_uri, scope)
 
@@ -58,60 +60,84 @@ def short_term(request):
 
     user_id = request.user.id
 
-    code = request.session.get(str(user_id) + "_code")
+    if(request.session.get(str(user_id) + "_code")):
 
-    token = request.session.get(str(user_id) + "_token")
+        code = request.session.get(str(user_id) + "_code")
 
-    results = auth.get_top_tracks(token, 'short_term')
+        if(request.session.get(str(user_id) + "_token")):
+            token = request.session.get(str(user_id) + "_token")
+        else:
+            token = auth.get_authorize_token(code)
 
-    context = {
-        'top_tracks': results,
-        'time_range': 'Short term'
-    }
+        results = auth.get_top_tracks(token, 'short_term')
 
-    upload_songs(user_id, results, 'short_term')
+        context = {
+            'top_tracks': results,
+            'time_range': 'Short term'
+        }
+
+        upload_songs(user_id, results, 'short_term')
+        
+        return render(request, 'recommend/top_tracks.html', context = context)
     
-    return render(request, 'recommend/top_tracks.html', context = context)
+    else:
+        return redirect('../../recommend/')
 
 @login_required
 def medium_term(request):
 
     user_id = request.user.id
 
-    code = request.session.get(str(user_id) + "_code")
+    if(request.session.get(str(user_id) + "_code")):
 
-    token = request.session.get(str(user_id) + "_token")
+        code = request.session.get(str(user_id) + "_code")
 
-    results = auth.get_top_tracks(token, 'medium_term')
+        if(request.session.get(str(user_id) + "_token")):
+            token = request.session.get(str(user_id) + "_token")
+        else:
+            token = auth.get_authorize_token(code)
 
-    context = {
-        'top_tracks': results,
-        'time_range': 'Medium term'
-    } 
+        results = auth.get_top_tracks(token, 'medium_term')
+
+        context = {
+            'top_tracks': results,
+            'time_range': 'Medium term'
+        }
+
+        upload_songs(user_id, results, 'medium_term')
+        
+        return render(request, 'recommend/top_tracks.html', context = context)
     
-    upload_songs(user_id, results, 'medium_term')
-
-    return render(request, 'recommend/top_tracks.html', context = context)
+    else:
+        return redirect('../../recommend/')
 
 @login_required
 def long_term(request):
 
     user_id = request.user.id
 
-    code = request.session.get(str(user_id) + "_code")
+    if(request.session.get(str(user_id) + "_code")):
 
-    token = request.session.get(str(user_id) + "_token")
+        code = request.session.get(str(user_id) + "_code")
 
-    results = auth.get_top_tracks(token, 'long_term')
+        if(request.session.get(str(user_id) + "_token")):
+            token = request.session.get(str(user_id) + "_token")
+        else:
+            token = auth.get_authorize_token(code)
 
-    context = {
-        'top_tracks': results,
-        'time_range': 'Long term'
-    }
+        results = auth.get_top_tracks(token, 'long_term')
 
-    upload_songs(user_id, results, 'long_term')
+        context = {
+            'top_tracks': results,
+            'time_range': 'Long term'
+        }
+
+        upload_songs(user_id, results, 'long_term')
+        
+        return render(request, 'recommend/top_tracks.html', context = context)
     
-    return render(request, 'recommend/top_tracks.html', context = context)
+    else:
+        return redirect('../../recommend/')
 
 
 def upload_songs(user_id, songs, time_range):
@@ -155,6 +181,37 @@ def upload_songs(user_id, songs, time_range):
                 time_range = time_range
             )
             this_top_tracks.save()
+
+@login_required
+def recommendations(request):
+
+    current_user = request.user.id
+
+    code = request.session.get(str(current_user) + "_code")
+
+    if(request.session.get(str(current_user) + "_token")):
+        token = request.session.get(str(current_user) + "_token")
+    else:
+        token = auth.get_authorize_token(code)
+
+    user_recommendations_objects = Recommendation.objects.filter(user_id = current_user)
+
+    user_recommendations = []
+    for recommendation in user_recommendations_objects:
+        this_song = Song.objects.filter(song_id = recommendation.song_id)
+        user_recommendations.append(this_song)
+
+    spotify_id, playlist_id = auth.make_playlist(token, user_recommendations_objects)
+
+    context = {
+
+        'recommendations': user_recommendations_objects,
+        'spotify_id': spotify_id,
+        'playlist_id': playlist_id
+        
+    }
+
+    return render(request, 'recommend/recommendations.html', context = context)
 
 
 def view_404(request, exception):
