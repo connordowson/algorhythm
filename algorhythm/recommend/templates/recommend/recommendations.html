@@ -1,0 +1,39 @@
+{% extends "recommend/base.html" %}
+
+{% block title %} Top tracks {% endblock title %}
+
+{% block content %}
+
+
+<section class="section">
+
+    <div class="panel section__top-tracks">
+
+    <h1 class="section__title title top-track__title"> Recommendations </h1>
+
+    <p class="panel__text"> Your recommendations! </p> <br>
+
+    <iframe src="https://open.spotify.com/embed/user/{{ spotify_id }}/playlist/{{ playlist_id }}" width="100%" height="380" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+
+        {% if recommendations %}
+
+        {% comment %} Show tracks once they have been found  {% endcomment %}
+
+            <ul>
+
+            {% for track in recommendations %}
+
+                <li class="top-track">  <img src='{{ track.image_url }}' height="50"> <a class="top-track__text"> {{forloop.counter}}. {{ track.song_id.title }} - {{ track.song_id.artist }} </a> </li>                
+
+            {% endfor %}
+
+            </ul>
+                   
+        {% endif %}
+
+
+    </div>
+    
+</section>
+
+{% endblock content %}

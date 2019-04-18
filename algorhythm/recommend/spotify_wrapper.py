@@ -120,4 +120,58 @@ class SpotifyWrapper(object):
 
         return(results.json())
 
+    def make_playlist(self, token, songs):
+
+        endpoint = 'https://api.spotify.com/v1/me/'
+
+        url = endpoint
+
+        headers = {'Authorization': 'Bearer {0}'.format(token)}
+
+        results = requests.get(url, headers = headers)
+
+        results = results.json()
+
+        spotify_id = results['id']
+
+        endpoint = 'https://api.spotify.com/v1/users/{0}/playlists'.format(spotify_id)
+
+        headers = {'Authorization': 'Bearer {0}'.format(token), 'Content-Type' : 'application/json'}
+
+        queries = {
+            'name': 'Algorhythm Recommendations',
+            'description': 'Playlist made from recommendations at https://algorhythm.connordowson.com/',
+        }
+
+        queries = json.dumps(queries)
+
+        results = requests.post(endpoint, headers = headers, data = queries)
+
+        playlist_id = results.json()['id']
+
+        endpoint = 'https://api.spotify.com/v1/playlists/{0}/tracks'.format(playlist_id)
+
+        songs_to_add = []
+
+        for song in songs:
+            songs_to_add.append("spotify:track:{0}".format(song.song_id.song_id))
+
+        queries = {
+
+            'uris': songs_to_add
+
+        }
+
+        queries = json.dumps(queries)
+
+        results = requests.post(endpoint, headers = headers, data = queries)
+
+        return(spotify_id, playlist_id)
+
+
+
+
+
+
+
 

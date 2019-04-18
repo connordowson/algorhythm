@@ -33,6 +33,7 @@ urlpatterns = [
 
     path('', recommend_views.index, name = 'index'),
     path('recommend/', recommend_views.recommend, name = 'recommend'),
+    path('recommendations/', recommend_views.recommendations, name = 'recommendations'),
     path('recommend/short_term/', recommend_views.short_term, name = 'Short term'),
     path('recommend/medium_term/', recommend_views.medium_term, name = 'Medium term'),
     path('recommend/long_term/', recommend_views.long_term, name = 'Long term'),

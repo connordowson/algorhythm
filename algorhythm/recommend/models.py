@@ -66,6 +66,14 @@ class UserTopTracks(models.Model):
     class Meta:
         unique_together = (('user_id', 'song_id', 'time_range'))
 
+
+class Recommendation(models.Model):
+    user_id = models.ForeignKey(User, on_delete = models.CASCADE)
+    song_id = models.ForeignKey(Song, on_delete = models.CASCADE)
+
+    class Meta:
+        unique_together = (('user_id', 'song_id'))
+
 class SongFeedback(models.Model):
     user_id = models.ForeignKey(User, on_delete = models.CASCADE)
     song_id = models.ForeignKey(Song, on_delete = models.CASCADE)
@@ -73,3 +81,4 @@ class SongFeedback(models.Model):
 
     class Meta:
         unique_together = (('user_id', 'song_id', 'feedback'))
+

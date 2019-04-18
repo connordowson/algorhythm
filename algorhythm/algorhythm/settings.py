@@ -80,9 +80,9 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'algorhythm',
-        'USER': 'postgres',
+        'USER': 'admin',
         'PASSWORD': '***REMOVED***',
-        'HOST': 'localhost',
+        'HOST': 'connordowson.com',
         'PORT': '',
     }
 }
