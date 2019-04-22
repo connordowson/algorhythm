@@ -312,7 +312,7 @@ ul {
   text-align: center; }
 
 iframe {
-  padding-bottom: 24px; }
+  padding: 24px 0; }
 
 .feedback__container {
   margin-bottom: 12px;
@@ -332,4 +332,6 @@ iframe {
 .btn__feedback {
   clear: both;
   float: none;
-  margin: 24px auto 0 auto; }
+  margin: 24px auto 0 auto;
+  width: 300px;
+  text-align: center; }

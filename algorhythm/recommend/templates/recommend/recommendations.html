@@ -11,7 +11,19 @@
 
     <h1 class="section__title title top-track__title"> Recommendations </h1>
 
-    <p class="panel__text"> Your recommendations! </p> <br>
+    {% if recommendations %}
+
+    <p class="panel__text"> Your recommendations! Please submit your feedback by clicking the button below to help out with my dissertation, thanks! </p> <br>
+
+    <a class="btn btn--large btn__feedback" href="../feedback/"> Submit feedback </a>
+
+    {% endif %}
+
+    {% if not recommendations %}
+
+    <p class="panel__text"> Your recommendations aren't ready yet, sorry! </p>
+
+    {% endif %}
 
     <iframe src="https://open.spotify.com/embed/user/{{ spotify_id }}/playlist/{{ playlist_id }}" width="100%" height="380" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
 
@@ -25,37 +37,15 @@
 
             {% for track in recommendations %}
 
-                <li class="top-track">  <img src='{{ track.image_url }}' height="50"> <a class="top-track__text"> {{forloop.counter}}. {{ track.song_id.title }} - {{ track.song_id.artist }} </a> </li>                
-                
-                <div class="feedback__container">
-                
-                    <div class="feedback__radio__wrapper">
-                        <input type="radio" class="feedback__radio" id="{{ track.song_id.title }}"> </input>
-                        <label for="{{ track.song_id.title }}" class="feedback__radio__label"> I liked this song </label>
-                    </div>
-
-                    <div class="feedback__radio__wrapper">
-                        <input type="radio" class="feedback__radio" id="{{ track.song_id.title }}"> </input>
-                        <label for="{{ track.song_id.title }}" class="feedback__radio__label"> I liked this song but I already knew it </label>
-                    </div>
-
-                    <div class="feedback__radio__wrapper">
-                        <input type="radio" class="feedback__radio" id="{{ track.song_id.title }}"> </input>
-                        <label for="{{ track.song_id.title }}" class="feedback__radio__label"> I didn't like this song </label>
-                    </div>
-
-                    <div class="feedback__radio__wrapper">
-                        <input type="radio" class="feedback__radio" id="{{ track.song_id.title }}"> </input>
-                        <label for="{{ track.song_id.title }}" class="feedback__radio__label"> I didn't like this song and I already knew it </label>
-                    </div>
-
-                </div>
+                <li class="top-track"> <a class="top-track__text"> {{forloop.counter}}. {{ track.song_id.title }} - {{ track.song_id.artist }} </a> </li>                
 
             {% endfor %}
 
             </ul>
                    
         {% endif %}
+
+
 
         </form>
 

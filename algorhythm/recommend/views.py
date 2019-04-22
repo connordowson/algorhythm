@@ -10,8 +10,6 @@ scope = 'user-top-read playlist-modify-public'
 client_id = '***REMOVED***'
 client_secret = '***REMOVED***'
 redirect_uri = 'https://algorhythm.connordowson.com/recommend/'
-redirect_uri = 'http://localhost:8000/recommend/'
-
 
 auth = spotify_wrapper.SpotifyWrapper(client_id, client_secret, redirect_uri, scope)
 
@@ -201,13 +199,13 @@ def recommendations(request):
         this_song = Song.objects.filter(song_id = recommendation.song_id)
         user_recommendations.append(this_song)
 
-    # spotify_id, playlist_id = auth.make_playlist(token, user_recommendations_objects)
+    spotify_id, playlist_id = auth.make_playlist(token, user_recommendations_objects)
 
     context = {
 
         'recommendations': user_recommendations_objects,
-        # 'spotify_id': spotify_id,
-        # 'playlist_id': playlist_id
+        'spotify_id': spotify_id,
+        'playlist_id': playlist_id
         
     }
 
@@ -228,13 +226,14 @@ def feedback(request):
     }
 
     if request.method == 'POST':
-        form_data = []
+
+        this_user = User.objects.get(id = current_user)
+
+        SongFeedback.objects.filter(user_id = this_user).delete()
+
         for song in user_recommendations_objects:
             feedback = request.POST.get(song.song_id.song_id)
-            form_data.append(feedback)
-            
             this_song = Song.objects.get(song_id = song.song_id.song_id)
-            this_user = User.objects.get(id = current_user)
 
             this_feedback = SongFeedback.objects.create(
                 user_id = this_user,
@@ -257,29 +256,32 @@ def feedback_submit(request):
     current_user = request.user.id
 
     if request.method == 'POST':
+
+
+
         data = request.POST.get('5QY32LcWfj4KmeUtCksKqX')
 
 
-        # user_recommendations_objects = Recommendation.objects.filter(user_id = current_user)
-        # user_recommendations = []
-        # for recommendation in user_recommendations_objects:
-        #     this_song = Song.objects.filter(song_id = recommendation.song_id)
-        #     user_recommendations.append(this_song)
+        user_recommendations_objects = Recommendation.objects.filter(user_id = current_user)
+        user_recommendations = []
+        for recommendation in user_recommendations_objects:
+            this_song = Song.objects.filter(song_id = recommendation.song_id)
+            user_recommendations.append(this_song)
 
-        # form_data = []
+        form_data = []
 
-        # for song in user_recommendations:
-        #     song = data.get('name')
-        #     feedback = data.get(song.song_id)
-        #     temp = [song, feedback]
-        #     form_data.append(temp)
+        for song in user_recommendations:
+            song = data.get('name')
+            feedback = data.get(song.song_id)
+            temp = [song, feedback]
+            form_data.append(temp)
 
-        #     this_feedback = SongFeedback.objects.create(
-        #         user_id = current_user,
-        #         song_id = song,
-        #         feedback = "Feedback"
-        #     )
-        #     this_feedback.save()
+            this_feedback = SongFeedback.objects.create(
+                user_id = current_user,
+                song_id = song,
+                feedback = "Feedback"
+            )
+            this_feedback.save()
 
     
         context = {
