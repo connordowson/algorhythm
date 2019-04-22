@@ -313,3 +313,23 @@ ul {
 
 iframe {
   padding-bottom: 24px; }
+
+.feedback__container {
+  margin-bottom: 12px;
+  margin-top: -12px; }
+
+.feedback__radio__wrapper {
+  background: #402F54;
+  padding: 12px 24px;
+  display: flex;
+  align-items: center; }
+
+.feedback__radio__label {
+  color: #F7F7F7;
+  background: #402F54;
+  padding: 6px; }
+
+.btn__feedback {
+  clear: both;
+  float: none;
+  margin: 24px auto 0 auto; }
