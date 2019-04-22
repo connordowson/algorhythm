@@ -386,7 +386,7 @@
 }
 
 iframe{
-    padding-bottom: 24px;
+    padding: 24px 0;
 }
 
 .feedback__container{
@@ -411,4 +411,6 @@ iframe{
     clear: both;
     float: none;
     margin: 24px auto 0 auto;
+    width: 300px;
+    text-align: center;
 }

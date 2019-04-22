@@ -31,27 +31,27 @@
 
             {% for track in recommendations %}
 
-                <li class="top-track">  <img src='{{ track.image_url }}' height="50"> <a class="top-track__text"> {{forloop.counter}}. {{ track.song_id.title }} - {{ track.song_id.artist }} </a> </li>                
+                <li class="top-track"> <h3 class="top-track__text"> {{forloop.counter}}. {{ track.song_id.title }} - {{ track.song_id.artist }} </h3> </li>                
                 
                 <div class="feedback__container">
                 
                     <div class="feedback__radio__wrapper">
-                        <input type="radio" class="feedback__radio" name="{{ track.song_id.song_id }}" id="{{ track.song_id.song_id }}_positive_1" value="positive_1"> </input>
+                        <input required type="radio" class="feedback__radio" name="{{ track.song_id.song_id }}" id="{{ track.song_id.song_id }}_positive_1" value="positive_1"> </input>
                         <label for="{{ track.song_id.song_id }}_positive_1" class="feedback__radio__label"> I liked this song </label>
                     </div>
 
                     <div class="feedback__radio__wrapper">
-                        <input type="radio" class="feedback__radio" name="{{ track.song_id.song_id }}" id="{{ track.song_id.song_id }}_positive_2" value="positive_2"> </input>
+                        <input required type="radio" class="feedback__radio" name="{{ track.song_id.song_id }}" id="{{ track.song_id.song_id }}_positive_2" value="positive_2"> </input>
                         <label for="{{ track.song_id.song_id }}_positive_2" class="feedback__radio__label"> I liked this song but I already knew it </label>
                     </div>
 
                     <div class="feedback__radio__wrapper">
-                        <input type="radio" class="feedback__radio" name="{{ track.song_id.song_id }}" id="{{ track.song_id.song_id }}_negative_1" value="negative_1"> </input>
+                        <input required type="radio" class="feedback__radio" name="{{ track.song_id.song_id }}" id="{{ track.song_id.song_id }}_negative_1" value="negative_1"> </input>
                         <label for="{{ track.song_id.song_id }}_negative_1" class="feedback__radio__label"> I didn't like this song </label>
                     </div>
 
                     <div class="feedback__radio__wrapper">
-                        <input type="radio" class="feedback__radio" name="{{ track.song_id.song_id }}" id="{{ track.song_id.song_id }}_negative_2" value="negative_2"> </input>
+                        <input required type="radio" class="feedback__radio" name="{{ track.song_id.song_id }}" id="{{ track.song_id.song_id }}_negative_2" value="negative_2"> </input>
                         <label for="{{ track.song_id.song_id }}_negative_2" class="feedback__radio__label"> I didn't like this song and I already knew it </label>
                     </div>
 
