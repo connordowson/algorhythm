@@ -1,0 +1,22 @@
+{% extends "recommend/base.html" %}
+
+{% block title %} Top tracks {% endblock title %}
+
+{% block content %}
+
+
+<section class="section">
+
+    <div class="panel section__top-tracks">
+
+    <h1 class="section__title title top-track__title"> Top tracks - {{ time_range }} </h1>
+
+    <p class="panel__text"> Thanks for submitting your feedback! </p> <br>
+
+        {{ form_data }}
+
+    </div>
+    
+</section>
+
+{% endblock content %}
