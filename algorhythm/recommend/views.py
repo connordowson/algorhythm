@@ -7,8 +7,8 @@ from http import cookies
 
 
 scope = 'user-top-read playlist-modify-public'
-client_id = '***REMOVED***'
-client_secret = '***REMOVED***'
+client_id = ''
+client_secret = ''
 redirect_uri = 'https://algorhythm.connordowson.com/recommend/'
 
 auth = spotify_wrapper.SpotifyWrapper(client_id, client_secret, redirect_uri, scope)
