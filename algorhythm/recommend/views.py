@@ -7,7 +7,7 @@ from http import cookies
 
 
 scope = 'user-top-read playlist-modify-public'
-client_id = 'REMOVED'
+client_id = '1da52ca36d5243978d4696749e207f6e'
 client_secret = '3aed58e8b8704a3ea7056bacb46a4f88'
 redirect_uri = 'https://algorhythm.connordowson.com/recommend/'
 
