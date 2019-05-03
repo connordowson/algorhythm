@@ -147,3 +147,6 @@ local_settings.py
 
 .env
 db.sqlite3
+
+sensitive.txt
+bfg.jar
