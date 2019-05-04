@@ -25,6 +25,7 @@ class SpotifyWrapper(object):
         self.code = None
 
 
+    # create url to authorize user
     def get_authorize_url(self):
 
         queries = {'client_id': self.client_id, 'redirect_uri': self.redirect_uri, 'scope': self.scope, 'response_type': 'code', 'show_dialog:' : 'true'}
@@ -36,6 +37,7 @@ class SpotifyWrapper(object):
         return(url)
 
 
+    # make call to get token
     def get_authorize_token(self, code):
 
         headers = make_authorization_headers(self.client_id, self.client_secret)
@@ -49,6 +51,7 @@ class SpotifyWrapper(object):
         return(token_info['access_token'])
 
 
+    # api call to get users top tracks
     def get_top_tracks(self, token, time_range):
 
         endpoint = 'https://api.spotify.com/v1/me/top/tracks'
@@ -69,6 +72,7 @@ class SpotifyWrapper(object):
 
         top_tracks = results['items']
 
+        # for each song that was returned add the relevant info to a list so it can be rendered on the page
         for index, track in enumerate(top_tracks):
 
             # Check if song info is already on the database
@@ -97,6 +101,7 @@ class SpotifyWrapper(object):
 
                 # Add list of tracks to variable to be used in context
                 tracks_list.append(track_info)
+            # if song is already in the databasse get info from databse, except for the picture
             else:
                 this_song = Song.objects.get(song_id = track['id'])
                 track_info = {}
@@ -108,6 +113,7 @@ class SpotifyWrapper(object):
 
         return tracks_list
 
+    # call api to get audio features for the song given in parameters
     def get_audio_features(self, song_id, token):
 
         endpoint = 'https://api.spotify.com/v1/audio-features/'
@@ -120,6 +126,7 @@ class SpotifyWrapper(object):
 
         return(results.json())
 
+    # create a playlist containing all the songs passed in
     def make_playlist(self, token, songs):
 
         endpoint = 'https://api.spotify.com/v1/me/'

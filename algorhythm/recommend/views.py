@@ -24,8 +24,11 @@ def recommend(request):
 
             code = request.GET.get('code')
 
+
             current_user = request.user
             request.session[str(current_user.id) + "_code"] = code
+
+            # if token already found send to recommend page
 
             if(request.session.get(str(current_user.id) + "_token")):
 
@@ -35,6 +38,7 @@ def recommend(request):
 
                 return render(request, 'recommend/recommend.html', context = context)
 
+            # else get a token and then send them there
             else:
                 request.session[str(current_user.id) + "_code"] = code
 
@@ -47,6 +51,7 @@ def recommend(request):
                 }
                 return render(request, 'recommend/recommend.html', context = context)
 
+        # if no authorisation code is in url, get the url and send the user there
         else:
             url = auth.get_authorize_url()
             return redirect(url)
@@ -57,6 +62,8 @@ def recommend(request):
 def short_term(request):
 
     user_id = request.user.id
+
+    # handle tokens, if one is found get top tracks
 
     if(request.session.get(str(user_id) + "_code")):
 
@@ -86,6 +93,8 @@ def medium_term(request):
 
     user_id = request.user.id
 
+    # handle tokens, if one is found get top tracks
+
     if(request.session.get(str(user_id) + "_code")):
 
         code = request.session.get(str(user_id) + "_code")
@@ -114,6 +123,8 @@ def long_term(request):
 
     user_id = request.user.id
 
+    # handle tokens, if one is found get top tracks
+
     if(request.session.get(str(user_id) + "_code")):
 
         code = request.session.get(str(user_id) + "_code")
@@ -138,6 +149,7 @@ def long_term(request):
         return redirect('../../recommend/')
 
 
+# upload songs found to the database
 def upload_songs(user_id, songs, time_range):
 
     this_user = User.objects.get(id = user_id)
@@ -181,6 +193,7 @@ def upload_songs(user_id, songs, time_range):
             this_top_tracks.save()
 
 @login_required
+# show a user their recommendations
 def recommendations(request):
 
     current_user = request.user.id
@@ -211,82 +224,7 @@ def recommendations(request):
 
     return render(request, 'recommend/recommendations.html', context = context)
 
-@login_required
-def feedback(request):
-    current_user = request.user.id
 
-    user_recommendations_objects = Recommendation.objects.filter(user_id = current_user)
-    user_recommendations = []
-    for recommendation in user_recommendations_objects:
-        this_song = Song.objects.filter(song_id = recommendation.song_id)
-        user_recommendations.append(this_song)
-
-    context = {
-        'recommendations': user_recommendations_objects,
-    }
-
-    if request.method == 'POST':
-
-        this_user = User.objects.get(id = current_user)
-
-        SongFeedback.objects.filter(user_id = this_user).delete()
-
-        for song in user_recommendations_objects:
-            feedback = request.POST.get(song.song_id.song_id)
-            this_song = Song.objects.get(song_id = song.song_id.song_id)
-
-            this_feedback = SongFeedback.objects.create(
-                user_id = this_user,
-                song_id = this_song,
-                feedback = feedback
-            )
-            this_feedback.save()
-
-        context = {
-            'feedback': True
-        }
-
-        return render(request, 'recommend/feedback.html', context = context)
-
-
-    return render(request, 'recommend/feedback.html', context = context)
-
-@login_required
-def feedback_submit(request):
-    current_user = request.user.id
-
-    if request.method == 'POST':
-
-
-
-        data = request.POST.get('5QY32LcWfj4KmeUtCksKqX')
-
-
-        user_recommendations_objects = Recommendation.objects.filter(user_id = current_user)
-        user_recommendations = []
-        for recommendation in user_recommendations_objects:
-            this_song = Song.objects.filter(song_id = recommendation.song_id)
-            user_recommendations.append(this_song)
-
-        form_data = []
-
-        for song in user_recommendations:
-            song = data.get('name')
-            feedback = data.get(song.song_id)
-            temp = [song, feedback]
-            form_data.append(temp)
-
-            this_feedback = SongFeedback.objects.create(
-                user_id = current_user,
-                song_id = song,
-                feedback = "Feedback"
-            )
-            this_feedback.save()
-
-    
-        context = {
-            'form_data': data
-        }
 
 def view_404(request, exception):
     return render(request, 'recommend/404.html')
